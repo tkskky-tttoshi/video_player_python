@@ -6,7 +6,6 @@ import numpy as np
 class Display:
     def __init__(self):
         self.input_key_array = ['a', 'b', 'c']
-        pass
 
     def return_file_name(self, input_value):
         file_name = ''
@@ -18,6 +17,7 @@ class Display:
             file_name = 'video/black.mp4'
         return file_name
 
+    #キー入力した際の時間を表示
     def print_typing_time(self):
         dt_now = datetime.datetime.now()
         print(dt_now)
@@ -32,12 +32,14 @@ class Display:
         flag = False
         while(video_file.isOpened()):
             ret, frame = video_file.read()
-            frame = cv2.resize(frame, dsize=(640, 640))
+            #frame = cv2.resize(frame, dsize=(1920, 2160))
             if ret:
+                frame = cv2.resize(frame, dsize=(640, 640))
                 cv2.imshow(file_name, frame)
             else:
-                print('No Frames')
-                break
+                print('Loop Here')
+                video_file.set(cv2.CAP_PROP_POS_FRAMES, 0)
+
             key = cv2.waitKey(fps) & 0xFF
             if key == ord('q'):
                 break
