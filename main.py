@@ -7,7 +7,7 @@ class Display:
     def __init__(self):
         self.input_key_array = ['a', 'b', 'c']
 
-    def return_file_name(self, input_value):
+    def get_file_name(self, input_value):
         file_name = ''
         if input_value == self.input_key_array[0]:
             file_name = 'video/parkmovie.mp4'
@@ -44,20 +44,20 @@ class Display:
             if key == ord('q'):
                 break
             if key == ord(self.input_key_array[0]):
-                file_name = self.return_file_name(self.input_key_array[0])
+                file_name = self.get_file_name(self.input_key_array[0])
                 print('Now parkmovie.mp4 on Air')
                 self.print_typing_time()
                 flag = True
                 break
             if key == ord(self.input_key_array[1]):
-                file_name = self.return_file_name(self.input_key_array[1])
+                file_name = self.get_file_name(self.input_key_array[1])
                 print('Now roadmovie.mp4 on Air')
                 self.print_typing_time()
                 flag = True
                 break
 
             if key == ord(self.input_key_array[2]):
-                file_name = self.return_file_name(self.input_key_array[2])
+                file_name = self.get_file_name(self.input_key_array[2])
                 print('Now black.mp4 on Air')
                 self.print_typing_time()
                 flag = True
@@ -75,17 +75,12 @@ if __name__ == '__main__':
     display = Display()
     while 1:
         i = i + 1
-        print(i)
+        print('')
+        print('Loop: '+str(i))
         input_key = input()
         flag = None
-        if input_key == display.input_key_array[0]:
-            file_name = display.return_file_name(input_key)
-            flag = True
-        elif input_key == display.input_key_array[1]:
-            file_name = display.return_file_name(input_key)
-            flag = True
-        elif input_key == display.input_key_array[2]:
-            file_name = display.return_file_name(input_key)
+        file_name = display.get_file_name(input_key)
+        if file_name != '':
             flag = True
 
         if flag == True:
