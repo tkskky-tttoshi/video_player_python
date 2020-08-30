@@ -22,9 +22,7 @@ class Display:
         dt_now = datetime.datetime.now()
         print(dt_now)
 
-    def display_image(self):
-        pass
-
+    #動画表示
     def play_video(self, file_name):
         video_file = cv2.VideoCapture(file_name)
         file_name = ''
@@ -43,29 +41,23 @@ class Display:
             key = cv2.waitKey(fps) & 0xFF
             if key == ord('q'):
                 break
-            if key == ord(self.input_key_array[0]):
+            elif key == ord(self.input_key_array[0]):
                 file_name = self.get_file_name(self.input_key_array[0])
                 print('Now parkmovie.mp4 on Air')
-                self.print_typing_time()
-                flag = True
-                break
-            if key == ord(self.input_key_array[1]):
+            elif key == ord(self.input_key_array[1]):
                 file_name = self.get_file_name(self.input_key_array[1])
                 print('Now roadmovie.mp4 on Air')
-                self.print_typing_time()
-                flag = True
-                break
-
-            if key == ord(self.input_key_array[2]):
+            elif key == ord(self.input_key_array[2]):
                 file_name = self.get_file_name(self.input_key_array[2])
                 print('Now black.mp4 on Air')
+
+            if file_name != '':
                 self.print_typing_time()
                 flag = True
                 break
 
         if flag == True:
             self.play_video(file_name)
-
         video_file.release()
         cv2.destroyAllWindows()
 
@@ -73,6 +65,7 @@ class Display:
 if __name__ == '__main__':
     i = 0
     display = Display()
+
     while 1:
         i = i + 1
         print('')
