@@ -1,7 +1,5 @@
 import cv2
-import time
 import datetime
-import numpy as np
 
 class Display:
     def __init__(self):
@@ -16,6 +14,15 @@ class Display:
         elif input_value == self.input_key_array[2]:
             file_name = 'video/black.mp4'
         return file_name
+
+
+ #Display Fullscreen mode
+    def imshow_fullscreen(self, winname, file_name):
+        cv2.namedWindow(winname, cv2.WINDOW_NORMAL)
+        cv2.setWindowProperty(winname, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+        cv2.imshow(winname, file_name)
+
+
 
     #キー入力した際の時間を表示
     def print_typing_time(self):
@@ -33,7 +40,13 @@ class Display:
             #frame = cv2.resize(frame, dsize=(1920, 2160))
             if ret:
                 frame = cv2.resize(frame, dsize=(640, 640))
-                cv2.imshow(file_name, frame)
+
+                #If Display on Dicited Screen
+                #cv2.imshow(file_name, frame)
+
+                #If Display on Full Screen
+                self.imshow_fullscreen('screen', frame)
+
             else:
                 print('Loop Here')
                 video_file.set(cv2.CAP_PROP_POS_FRAMES, 0)
